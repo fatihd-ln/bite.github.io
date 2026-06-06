@@ -1,6 +1,6 @@
 ---
 import BackgroundFX from '../components/BackgroundFX.astro';
-import { getLang } from '../i18n';
+import { getLang, localized, delocalized } from '../i18n';
 
 interface Props {
   title: string;
@@ -21,13 +21,21 @@ const lang = getLang(Astro.url);
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = new URL(image, Astro.site).toString();
 const ogLocale = lang === 'tr' ? 'tr_TR' : 'en_US';
+const ogLocaleAlt = lang === 'tr' ? 'en_US' : 'tr_TR';
+
+// Language alternates (hreflang) for the current page, for indexable pages only.
+const rawPath = Astro.url.pathname;
+const normalizedPath = rawPath !== '/' ? rawPath.replace(/\/$/, '') : '/';
+const canonicalPath = delocalized(normalizedPath);
+const altEnUrl = new URL(localized(canonicalPath, 'en'), Astro.site).toString();
+const altTrUrl = new URL(localized(canonicalPath, 'tr'), Astro.site).toString();
 
 const organizationLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'bite Systems',
   url: new URL('/', Astro.site).toString(),
-  logo: new URL('/media/logo.png', Astro.site).toString(),
+  logo: new URL('/icon-512.png', Astro.site).toString(),
   sameAs: ['https://youtu.be/LyIpHpMZL9c'],
   address: {
     '@type': 'PostalAddress',
@@ -44,17 +52,27 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
     <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
     <link rel="canonical" href={canonicalUrl} />
+    {!noindex && (
+      <>
+        <link rel="alternate" hreflang="en" href={altEnUrl} />
+        <link rel="alternate" hreflang="tr" href={altTrUrl} />
+        <link rel="alternate" hreflang="x-default" href={altEnUrl} />
+      </>
+    )}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="bite Systems" />
     <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1400" />
     <meta property="og:image:height" content="787" />
@@ -63,7 +81,11 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <link rel="icon" type="image/png" href="/media/logo.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
     {extraLd.map(ld => (
       <script type="application/ld+json" set:html={JSON.stringify(ld)} />
