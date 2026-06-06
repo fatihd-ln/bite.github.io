@@ -35,14 +35,30 @@ const lang = getLang(Astro.url);
 
     <div class="relative aspect-square">
       <video
-        src="/media/gimbal1.webm"
+        id="hero-video"
         autoplay
         muted
         loop
         playsinline
         class="w-full h-full object-contain scale-125"
-      ></video>
+      >
+        <source src="/media/gimbal1.webm" type="video/webm" />
+      </video>
     </div>
 
   </div>
 </section>
+
+<script>
+  // Transparent hero video: Safari/WebKit renders HEVC-with-alpha but not WebM
+  // alpha; every other engine uses the VP9-alpha webm. navigator.vendor is
+  // "Apple Computer, Inc." for desktop Safari and all iOS browsers (WebKit),
+  // and "Google Inc." / "" for Chrome, Edge and Firefox.
+  const v = document.getElementById('hero-video') as HTMLVideoElement | null;
+  const s = v?.querySelector('source');
+  if (v && s && /apple/i.test(navigator.vendor || '')) {
+    s.setAttribute('type', 'video/mp4; codecs="hvc1"');
+    s.setAttribute('src', '/media/gimbal1.mp4');
+    v.load();
+  }
+</script>
