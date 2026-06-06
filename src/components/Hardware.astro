@@ -1,0 +1,126 @@
+---
+import { useTranslations } from '../i18n';
+const t = useTranslations(Astro);
+const v = t.hardware.vision;
+---
+
+<section id="hardware" class="py-32 px-6">
+  <div class="max-w-6xl mx-auto space-y-32">
+
+    <div>
+
+      <div class="mb-16 max-w-2xl">
+        <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{t.hardware.kicker}</p>
+        <h2 class="text-4xl font-light tracking-tight [text-shadow:0_0_60px_rgba(255,255,255,0.15)]">
+          {t.hardware.title}
+        </h2>
+        <p class="text-gray-400 font-light mt-6 leading-relaxed">
+          {t.hardware.description}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl shadow-[0_10px_30px_-5px_rgba(0,0,0,0.7)] overflow-hidden">
+        {t.hardware.stats.map(s => (
+          <div class="bg-card/55 bg-[linear-gradient(rgba(0,0,0,0.11),rgba(0,0,0,0.11))] backdrop-blur-md px-6 py-4 text-center">
+            <p class="text-2xl font-light text-white">
+              {s.value}<span class="text-accent text-base ml-1 font-mono">{s.unit}</span>
+            </p>
+            <p class="text-muted text-[10px] uppercase tracking-widest mt-2">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+        <div class="space-y-1 order-2 lg:order-1">
+          {t.hardware.callouts.map(c => (
+            <div class="flex items-baseline justify-between gap-4 py-3 border-b border-border">
+              <span class="text-muted text-xs uppercase tracking-widest">{c.label}</span>
+              <span class="text-sm text-white font-light text-right">{c.value}</span>
+            </div>
+          ))}
+          {t.hardware.pcbDescription && (
+            <p class="text-gray-400 font-light text-sm leading-relaxed pt-6">
+              {t.hardware.pcbDescription}
+            </p>
+          )}
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <img
+            src="/media/pcb-v1.2.png"
+            alt={t.hardware.pcbCaption}
+            class="w-3/4 h-auto max-h-[265px] mx-auto lg:mr-0 lg:ml-auto object-contain"
+            style="filter: drop-shadow(0 25px 40px rgba(0,0,0,0.6));"
+          />
+          <p class="text-muted text-xs tracking-widest uppercase mt-8 w-3/4 mx-auto lg:mr-0 lg:ml-auto text-center">{t.hardware.pcbCaption}</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="vision">
+
+      <div class="mb-16 max-w-2xl">
+        <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{v.kicker}</p>
+        <h2 class="text-4xl font-light tracking-tight [text-shadow:0_0_60px_rgba(255,255,255,0.15)]">
+          {v.title}
+        </h2>
+        <p class="text-gray-400 font-light mt-6 leading-relaxed">
+          {v.description}
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl shadow-[0_10px_30px_-5px_rgba(0,0,0,0.7)] overflow-hidden">
+        {v.stats.map(s => (
+          <div class="bg-card/55 bg-[linear-gradient(rgba(0,0,0,0.11),rgba(0,0,0,0.11))] backdrop-blur-md px-6 py-5 text-center">
+            <p class="text-xl font-light text-white">{s.value}</p>
+            <p class="text-accent text-[10px] uppercase tracking-widest mt-1 font-mono">{s.sub}</p>
+            <p class="text-muted text-[10px] uppercase tracking-widest mt-1">{s.label}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+
+        <div class="space-y-1 order-2 lg:order-1">
+          {v.callouts.map(c => (
+            <div class="flex items-baseline justify-between gap-4 py-3 border-b border-border">
+              <span class="text-muted text-xs uppercase tracking-widest">{c.label}</span>
+              <span class="text-sm text-white font-light text-right">{c.value}</span>
+            </div>
+          ))}
+          {v.closingDescription && (
+            <p class="text-gray-400 font-light text-sm leading-relaxed pt-6">
+              {v.closingDescription}
+            </p>
+          )}
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <div
+            role="img"
+            aria-label={v.imageCaption}
+            class="relative w-3/4 h-auto aspect-[1202/850] mx-auto lg:mr-0 lg:ml-auto bg-[#0d0d0d] border border-border overflow-hidden"
+            style="box-shadow: inset 0 0 80px 10px rgba(0,0,0,0.85), 0 12px 30px rgba(0,0,0,0.5);"
+          >
+            <img
+              src="/media/vision-schematic.png"
+              alt=""
+              aria-hidden="true"
+              class="absolute inset-0 w-full h-full object-contain opacity-75"
+            />
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="text-white text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase border border-white/30 px-4 py-2 bg-black/40 backdrop-blur-[3px]">
+                {v.comingSoon}
+              </span>
+            </div>
+          </div>
+          <p class="text-muted text-xs tracking-widest uppercase mt-8 w-3/4 mx-auto lg:mr-0 lg:ml-auto text-center">{v.imageCaption}</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>

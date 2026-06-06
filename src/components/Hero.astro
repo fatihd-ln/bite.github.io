@@ -1,0 +1,48 @@
+---
+import { useTranslations, getLang, localized } from '../i18n';
+const t = useTranslations(Astro);
+const lang = getLang(Astro.url);
+---
+
+<section class="min-h-screen flex flex-col px-6 pt-16">
+  <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24 flex-1">
+
+    <div>
+      <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-6">{t.hero.kicker}</p>
+      <h1 class="text-5xl lg:text-6xl font-light leading-tight mb-6 tracking-tight [text-shadow:0_0_80px_rgba(255,255,255,0.18)]">
+        {t.hero.h1Line1}<br />
+        {t.hero.h1Line2}<br />
+        <span class="font-semibold">{t.hero.h1Line3}</span>
+      </h1>
+      <p class="text-gray-400 text-lg font-light leading-relaxed max-w-md mb-10">
+        {t.hero.description}
+      </p>
+      <div class="flex items-center gap-6">
+        <a
+          href={localized('/products', lang)}
+          class="font-product px-8 py-3 bg-white text-black text-lg font-semibold tracking-wide uppercase hover:bg-gray-200 transition-colors duration-200"
+        >
+          {t.hero.ctaPrimary}
+        </a>
+        <a
+          href={localized('/contact', lang)}
+          class="text-sm text-gray-400 hover:text-white tracking-wide uppercase transition-colors duration-200"
+        >
+          {t.hero.ctaSecondary}
+        </a>
+      </div>
+    </div>
+
+    <div class="relative aspect-square">
+      <video
+        src="/media/gimbal1.webm"
+        autoplay
+        muted
+        loop
+        playsinline
+        class="w-full h-full object-contain scale-125"
+      ></video>
+    </div>
+
+  </div>
+</section>

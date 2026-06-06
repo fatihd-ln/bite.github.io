@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Products from '../../components/Products.astro';
+import Footer from '../../components/Footer.astro';
+import { useTranslations } from '../../i18n';
+const t = useTranslations(Astro);
+
+const productImages: Record<string, string> = {
+  b270: '/media/b270.png',
+  b230: '/media/b1.png',
+  b330: '/media/b330.png',
+  'tracker-1': '/media/antenna-tracker.png',
+};
+const allProducts = [...t.products.gimbals, ...t.products.trackers];
+const productLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: allProducts.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: p.name,
+      description: p.description,
+      brand: { '@type': 'Brand', name: 'bite Systems' },
+      manufacturer: { '@type': 'Organization', name: 'bite Systems' },
+      ...(productImages[p.id]
+        ? { image: new URL(productImages[p.id], Astro.site).toString() }
+        : {}),
+    },
+  })),
+};
+---
+
+<Layout title={t.meta.products.title} description={t.meta.products.description} image="/media/b270.png" jsonLd={productLd}>
+  <Nav />
+  <main class="pt-16">
+    <Products />
+  </main>
+  <Footer />
+</Layout>

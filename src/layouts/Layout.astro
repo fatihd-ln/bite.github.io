@@ -1,0 +1,98 @@
+---
+import BackgroundFX from '../components/BackgroundFX.astro';
+import { getLang } from '../i18n';
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  noindex?: boolean;
+}
+const {
+  title,
+  description = 'Precision drone gimbal systems, handcrafted for professionals.',
+  image = '/media/b270.png',
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+const lang = getLang(Astro.url);
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const ogImage = new URL(image, Astro.site).toString();
+const ogLocale = lang === 'tr' ? 'tr_TR' : 'en_US';
+
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'bite Systems',
+  url: new URL('/', Astro.site).toString(),
+  logo: new URL('/media/logo.png', Astro.site).toString(),
+  sameAs: ['https://youtu.be/LyIpHpMZL9c'],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Ataşehir',
+    addressRegion: 'Istanbul',
+    addressCountry: 'TR',
+  },
+};
+
+const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="bite Systems" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="787" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/png" href="/media/logo.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationLd)} />
+    {extraLd.map(ld => (
+      <script type="application/ld+json" set:html={JSON.stringify(ld)} />
+    ))}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Saira+Condensed:wght@400;500;600;700&family=Saira+Extra+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-[#0a0a0a] text-white font-sans antialiased">
+    <BackgroundFX />
+    <slot />
+    <style is:global>
+      img, video {
+        -webkit-touch-callout: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+    </style>
+    <script>
+      const block = (e: Event) => {
+        const t = e.target as HTMLElement | null;
+        if (t && (t.tagName === 'IMG' || t.tagName === 'VIDEO')) {
+          e.preventDefault();
+        }
+      };
+      document.addEventListener('contextmenu', block);
+      document.addEventListener('dragstart', block);
+    </script>
+  </body>
+</html>
