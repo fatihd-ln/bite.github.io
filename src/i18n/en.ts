@@ -1,8 +1,8 @@
 export const en = {
   meta: {
     home: {
-      title: 'bite Systems — Open ISR Gimbals for UAVs',
-      description: 'Open-architecture ISR gimbals for PX4, ArduPilot and iNAV. No SoC lock-in. No cloud.',
+      title: 'bite Systems — Stabilized ISR Gimbals for UAVs',
+      description: 'Stabilized ISR gimbals for unmanned platforms. Open-architecture EO/IR camera systems with onboard target tracking, built for PX4, ArduPilot and iNAV.',
     },
     products: {
       title: 'Products — bite Systems',

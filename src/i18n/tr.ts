@@ -3,8 +3,8 @@ import type { Dictionary } from './en';
 export const tr: Dictionary = {
   meta: {
     home: {
-      title: 'bite Systems — İnsansız Hava Araçları için Açık Mimarili ISR Gimballar',
-      description: 'PX4, ArduPilot ve iNAV için açık mimarili ISR gimbal sistemleri. SoC kilidi yok. Bulut yok.',
+      title: 'bite Systems — İnsansız Hava Araçları için Stabilize ISR Gimballar',
+      description: 'İnsansız hava araçları için stabilize ISR gimballar. Gömülü hedef takipli, açık mimarili EO/IR kamera sistemleri; PX4, ArduPilot ve iNAV uyumlu.',
     },
     products: {
       title: 'Ürünler — bite Systems',
