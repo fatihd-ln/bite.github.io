@@ -4,7 +4,7 @@ export const tr: Dictionary = {
   meta: {
     home: {
       title: 'bite Systems — İnsansız Hava Araçları için Stabilize ISR Gimballar',
-      description: 'İnsansız hava araçları için stabilize ISR gimballar. Gömülü hedef takipli, açık mimarili EO/IR kamera sistemleri; PX4, ArduPilot ve iNAV uyumlu.',
+      description: 'İnsansız hava araçları için stabilize ISR gimballar. Gömülü hedef takipçili, açık mimarili EO/IR kamera sistemleri; PX4, ArduPilot ve iNAV uyumlu.',
     },
     products: {
       title: 'Ürünler — bite Systems',
