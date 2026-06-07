@@ -52,7 +52,7 @@ export const tr: Dictionary = {
       gimbals: {
         kicker: 'Ürün Ailesi',
         title: 'B-Serisi gimballar.',
-        intro: 'Çeşitli sensör kombinasyonlarına sahip 2 eksenli stabilize gimballar. Ortak mekanik ve kontrol platformu üzerine geliştiriliyor.',
+        intro: 'Tüm sensör varyantlarında ortak bir mekanik ve kontrol platformu. Görev için üretildi.',
       },
       trackers: {
         kicker: 'Yer Segmenti',

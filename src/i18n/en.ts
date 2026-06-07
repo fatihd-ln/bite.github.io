@@ -50,7 +50,7 @@ export const en = {
       gimbals: {
         kicker: 'Product Family',
         title: 'B-Series gimbals.',
-        intro: 'A common mechanical and control platform across sensor variants. Initial development is focused on the B-270; thermal and LiDAR variants follow once the base platform is qualified.',
+        intro: 'A common mechanical and control platform across sensor variants. Built for the mission.',
       },
       trackers: {
         kicker: 'Ground Segment',
