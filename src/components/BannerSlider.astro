@@ -1,0 +1,50 @@
+---
+interface Props {
+  day: string;
+  night: string;
+  alt?: string;
+  dayLabel?: string;
+  nightLabel?: string;
+  fill?: boolean;
+  imgClass?: string;
+}
+const { day, night, alt = '', dayLabel = 'Day', nightLabel = 'Night', fill = false, imgClass = '' } = Astro.props;
+---
+
+<div class={`dn-banner relative w-full overflow-hidden ${fill ? 'h-full' : ''}`}>
+  {/* Base layer: day */}
+  <img src={day} alt={alt} draggable="false" class={`select-none block ${fill ? 'w-full h-full object-cover' : 'w-full h-auto'} ${imgClass}`} />
+
+  {/* Crossfade layer: night */}
+  <img
+    src={night}
+    alt=""
+    aria-hidden="true"
+    draggable="false"
+    class={`dn-night absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-in-out select-none ${imgClass}`}
+  />
+
+  {/* Day / Night toggle */}
+  <div class="absolute bottom-4 right-4 z-10 inline-flex items-center rounded-full bg-black/40 p-1 text-[11px] font-semibold uppercase tracking-wider">
+    <button type="button" data-mode="day" class="dn-btn px-3.5 py-1.5 rounded-full transition-colors bg-white text-slate-900">{dayLabel}</button>
+    <button type="button" data-mode="night" class="dn-btn px-3.5 py-1.5 rounded-full transition-colors text-white/80">{nightLabel}</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.dn-banner').forEach(banner => {
+    const night = banner.querySelector<HTMLElement>('.dn-night');
+    const btns = Array.from(banner.querySelectorAll<HTMLButtonElement>('.dn-btn'));
+    if (!night) return;
+    const set = (mode: string) => {
+      night.style.opacity = mode === 'night' ? '1' : '0';
+      btns.forEach(btn => {
+        const active = btn.dataset.mode === mode;
+        btn.classList.toggle('bg-white', active);
+        btn.classList.toggle('text-slate-900', active);
+        btn.classList.toggle('text-white/80', !active);
+      });
+    };
+    btns.forEach(btn => btn.addEventListener('click', () => set(btn.dataset.mode || 'day')));
+  });
+</script>

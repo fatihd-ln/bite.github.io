@@ -14,8 +14,9 @@ npm-debug.log*
 .env.*
 !.env.example
 
-# editor / OS
+# editor / OS / local tooling
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+.claude/

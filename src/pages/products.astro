@@ -1,16 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import Products from '../components/Products.astro';
 import Footer from '../components/Footer.astro';
-import { useTranslations } from '../i18n';
+import { useTranslations, getLang, localized } from '../i18n';
 const t = useTranslations(Astro);
+const lang = getLang(Astro.url);
 
 const productImages: Record<string, string> = {
-  b270: '/media/b270.png',
-  b230: '/media/b1.png',
-  b330: '/media/b330.png',
-  'tracker-1': '/media/antenna-tracker.png',
+  b270: '/media/b270.webp',
+  b230: '/media/b1.webp',
+  b330: '/media/b330.webp',
+  'tracker-1': '/media/antenna-tracker.webp',
 };
 const allProducts = [...t.products.gimbals, ...t.products.trackers];
 const productLd = {
@@ -34,8 +36,29 @@ const productLd = {
 ---
 
 <Layout title={t.meta.products.title} description={t.meta.products.description} jsonLd={productLd}>
-  <Nav />
-  <main class="pt-16">
+  <Nav transparent />
+  <main>
+    {/* Full-bleed hero: sky banner with the nav + title overlaid on top */}
+    <section class="relative w-full overflow-hidden">
+      <img
+        src="/media/uav2025-sky-wide.webp"
+        alt="UAV carrying a bite gimbal payload over the sea"
+        fetchpriority="high"
+        class="absolute inset-0 w-full h-full object-cover object-[68%_42%] md:object-[50%_42%]"
+      />
+      {/* legibility: darken the top (nav) and the bottom (title) */}
+      <div class="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/0 to-ink/45"></div>
+      <div class="absolute inset-0 bg-gradient-to-tr from-ink/35 via-transparent to-transparent"></div>
+
+      <div class="relative flex flex-col min-h-[480px] lg:min-h-[80vh] pt-16">
+        <Breadcrumb light items={[{ label: t.nav.home, href: localized('/', lang) }, { label: t.nav.products }]} />
+        <div class="shell mt-auto pb-14 lg:pb-20">
+          <p class="text-white/70 text-xs tracking-[0.3em] uppercase mb-5">{t.products.header.kicker}</p>
+          <h1 class="text-4xl lg:text-6xl font-light tracking-tight leading-[1.05] text-white max-w-3xl [text-shadow:0_1px_2px_rgba(0,0,0,0.4),0_2px_18px_rgba(11,18,32,0.5)]">{t.products.header.title}</h1>
+          <p class="text-white/85 font-light mt-6 leading-relaxed max-w-xl [text-shadow:0_1px_10px_rgba(11,18,32,0.45)]">{t.products.header.subtext}</p>
+        </div>
+      </div>
+    </section>
     <Products />
   </main>
   <Footer />

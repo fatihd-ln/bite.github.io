@@ -1,5 +1,4 @@
 ---
-import BackgroundFX from '../components/BackgroundFX.astro';
 import { getLang, localized, delocalized } from '../i18n';
 
 interface Props {
@@ -52,8 +51,8 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0a0a" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#f4f6fb" />
+    <meta name="color-scheme" content="light" />
     <meta name="description" content={description} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; media-src 'self'; connect-src 'self'; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'" />
@@ -82,6 +81,7 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -95,8 +95,7 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Saira+Condensed:wght@400;500;600;700&family=Saira+Extra+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
-  <body class="bg-[#0a0a0a] text-white font-sans antialiased">
-    <BackgroundFX />
+  <body class="bg-[#f4f6fb] text-slate-900 font-sans antialiased">
     <slot />
     <style is:global>
       img, video {
@@ -104,6 +103,21 @@ const extraLd = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
         -webkit-user-drag: none;
         user-select: none;
         -webkit-user-select: none;
+      }
+      /* Single site-wide content shell (Merio model): centered max-width with
+         a FIXED side margin. Below the max-width the margin is constant and the
+         content (incl. full-width picture boxes) fills the rest; above it the
+         content caps and the extra margin grows via centering. So vertical
+         layouts keep a fixed margin, wide desktop grows — no breakpoint jump. */
+      .shell {
+        width: 100%;
+        margin-inline: auto;
+        max-width: 1500px;
+        padding-inline: 40px;
+      }
+      /* Wider fixed side margin on desktop (mobile keeps 40px). */
+      @media (min-width: 1024px) {
+        .shell { padding-inline: 60px; }
       }
     </style>
     <script>

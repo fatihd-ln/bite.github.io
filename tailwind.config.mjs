@@ -4,11 +4,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        surface: '#141414',
-        card: '#181818',
-        border: '#252525',
-        muted: '#888888',
-        accent: '#6e8ac0',
+        surface: '#f4f6fb',
+        card: '#ffffff',
+        border: '#e2e8f0',
+        muted: '#64748b',
+        accent: '#2f58b1',
+        ink: '#23272e',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

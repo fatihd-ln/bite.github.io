@@ -1,0 +1,32 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+const { items, light = false, inset = false } = Astro.props as { items: Crumb[]; light?: boolean; inset?: boolean };
+
+const base = light ? 'text-white/80' : 'text-slate-500';
+const linkHover = light ? 'hover:text-white' : 'hover:text-accent';
+const current = light ? 'text-white' : 'text-slate-900';
+const sep = light ? 'text-white/60' : 'text-slate-400';
+const shadow = light ? '[text-shadow:0_1px_3px_rgba(0,0,0,0.6)]' : '';
+---
+
+<nav aria-label="Breadcrumb" class={`pt-8 pb-2 ${shadow}`}>
+  <ol class={`shell flex items-center flex-wrap gap-x-2 gap-y-1 text-xs tracking-[0.15em] uppercase ${base}`}>
+    {items.map((c, i) => (
+      <li class="flex items-center gap-2">
+        {c.href ? (
+          <a href={c.href} class={`${linkHover} transition-colors`}>{c.label}</a>
+        ) : (
+          <span class={current} aria-current="page">{c.label}</span>
+        )}
+        {i < items.length - 1 && (
+          <svg class={`w-3.5 h-3.5 ${sep}`} fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+          </svg>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

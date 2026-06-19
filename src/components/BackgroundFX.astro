@@ -1,70 +1,20 @@
 ---
 ---
 
-<div aria-hidden="true" class="bg-fx">
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-</div>
+<div aria-hidden="true" class="bg-fx"></div>
 
 <style>
+  /* Soft ambient glow behind all content. Baked as static radial-gradients
+     (no filter/animation/compositor layers) so it costs nothing per frame
+     while scrolling. */
   .bg-fx {
     position: fixed;
     inset: 0;
     z-index: -10;
-    overflow: hidden;
     pointer-events: none;
-  }
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    will-change: transform;
-  }
-  .blob-1 {
-    width: clamp(260px, 38vw, 640px);
-    aspect-ratio: 1;
-    background: #2563eb;
-    opacity: 0.18;
-    top: -12%;
-    left: -8%;
-    animation: drift1 18s ease-in-out infinite alternate;
-  }
-  .blob-2 {
-    width: clamp(220px, 32vw, 520px);
-    aspect-ratio: 1;
-    background: #1e3a8a;
-    opacity: 0.25;
-    top: 35%;
-    right: -10%;
-    animation: drift2 22s ease-in-out infinite alternate;
-  }
-  .blob-3 {
-    width: clamp(200px, 30vw, 480px);
-    aspect-ratio: 1;
-    background: #3b82f6;
-    opacity: 0.15;
-    bottom: -10%;
-    left: 28%;
-    animation: drift3 26s ease-in-out infinite alternate;
-  }
-  @media (max-width: 640px) {
-    .blob { filter: blur(60px); }
-    .blob-1 { opacity: 0.12; }
-    .blob-2 { opacity: 0.18; }
-    .blob-3 { opacity: 0.1; }
-  }
-  @keyframes drift1 {
-    to { transform: translate(140px, 100px) scale(1.1); }
-  }
-  @keyframes drift2 {
-    to { transform: translate(-120px, -140px) scale(0.92); }
-  }
-  @keyframes drift3 {
-    to { transform: translate(80px, -120px) scale(1.18); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .blob { animation: none; }
+    background:
+      radial-gradient(46vw 46vw at 12% 4%,  rgba(37, 99, 235, 0.14), transparent 60%),
+      radial-gradient(40vw 40vw at 95% 45%, rgba(59, 130, 246, 0.16), transparent 60%),
+      radial-gradient(38vw 38vw at 40% 96%, rgba(96, 165, 250, 0.16), transparent 60%);
   }
 </style>

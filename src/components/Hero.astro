@@ -4,61 +4,48 @@ const t = useTranslations(Astro);
 const lang = getLang(Astro.url);
 ---
 
-<section class="min-h-screen flex flex-col px-6 pt-16">
-  <div class="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center py-24 flex-1">
+<section class="min-h-screen flex flex-col pt-16">
+  <div class="shell grid grid-cols-1 lg:grid-cols-2 gap-16 items-center pt-12 pb-24 lg:py-24 flex-1">
 
-    <div>
-      <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-6">{t.hero.kicker}</p>
-      <h1 class="text-5xl lg:text-6xl font-light leading-tight mb-6 tracking-tight [text-shadow:0_0_80px_rgba(255,255,255,0.18)]">
-        {t.hero.h1Line1}<br />
+    <div class="lg:-translate-y-12">
+      <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-8 lg:mb-6">{t.hero.kicker}</p>
+      <h1 class="text-[2.75rem] lg:text-6xl font-light leading-tight mb-6 tracking-tight">
+        <Fragment set:html={t.hero.h1Line1} /><br />
         {t.hero.h1Line2}<br />
         <span class="font-semibold">{t.hero.h1Line3}</span>
       </h1>
-      <p class="text-gray-400 text-lg font-light leading-relaxed max-w-md mb-10">
+      <p class="text-slate-500 text-lg font-light leading-relaxed max-w-md mb-6 lg:mb-10">
         {t.hero.description}
       </p>
       <div class="flex items-center gap-6">
         <a
           href={localized('/products', lang)}
-          class="font-product px-8 py-3 bg-white text-black text-lg font-semibold tracking-wide uppercase hover:bg-gray-200 transition-colors duration-200"
+          class="font-product px-8 py-3 bg-accent text-white text-lg font-semibold tracking-wide uppercase hover:bg-blue-700 transition-colors duration-200"
         >
           {t.hero.ctaPrimary}
         </a>
         <a
           href={localized('/contact', lang)}
-          class="text-sm text-gray-400 hover:text-white tracking-wide uppercase transition-colors duration-200"
+          class="text-sm text-slate-500 hover:text-slate-900 tracking-wide uppercase transition-colors duration-200"
         >
           {t.hero.ctaSecondary}
         </a>
       </div>
     </div>
 
-    <div class="relative aspect-square">
+    <div class="relative aspect-square lg:-translate-y-8">
       <video
         id="hero-video"
         autoplay
         muted
         loop
         playsinline
-        class="w-full h-full object-contain scale-125"
+        class="w-full h-full object-contain scale-[1.06] lg:scale-[0.9375] -translate-y-[10%] lg:translate-y-[calc(-10%_+_1cm)]"
       >
         <source src="/media/gimbal1.webm" type="video/webm" />
+        <source src="/media/gimbal1.mp4" type="video/mp4" />
       </video>
     </div>
 
   </div>
 </section>
-
-<script>
-  // Transparent hero video: Safari/WebKit renders HEVC-with-alpha but not WebM
-  // alpha; every other engine uses the VP9-alpha webm. navigator.vendor is
-  // "Apple Computer, Inc." for desktop Safari and all iOS browsers (WebKit),
-  // and "Google Inc." / "" for Chrome, Edge and Firefox.
-  const v = document.getElementById('hero-video') as HTMLVideoElement | null;
-  const s = v?.querySelector('source');
-  if (v && s && /apple/i.test(navigator.vendor || '')) {
-    s.setAttribute('type', 'video/mp4; codecs="hvc1"');
-    s.setAttribute('src', '/media/gimbal1.mp4');
-    v.load();
-  }
-</script>

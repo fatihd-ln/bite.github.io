@@ -3,15 +3,15 @@ import { useTranslations } from '../i18n';
 const t = useTranslations(Astro);
 ---
 
-<section id="contact" class="py-32 px-6">
-  <div class="max-w-6xl mx-auto">
+<section id="contact" class="pt-10 pb-32">
+  <div class="shell">
 
     <div class="mb-16 max-w-2xl">
       <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{t.contact.kicker}</p>
-      <h2 class="text-4xl font-light tracking-tight mb-6 [text-shadow:0_0_60px_rgba(255,255,255,0.15)]">
+      <h2 class="text-4xl font-light tracking-tight mb-6">
         {t.contact.titlePart1}<span class="font-semibold">{t.contact.titlePart2}</span>
       </h2>
-      <p class="text-gray-400 font-light leading-relaxed">
+      <p class="text-slate-500 font-light leading-relaxed">
         {t.contact.description}
       </p>
     </div>
@@ -23,12 +23,12 @@ const t = useTranslations(Astro);
         <div class="border-t border-border pt-6">
           <p class="text-muted text-xs uppercase tracking-widest mb-3">{t.contact.emailLabel}</p>
           <div class="flex items-center gap-3">
-            <a href="mailto:info@bitesystems.com.tr" class="text-white text-base font-light hover:text-accent transition-colors break-all">
+            <a href="mailto:info@bitesystems.com.tr" class="text-slate-900 text-base font-light hover:text-accent transition-colors break-all">
               info@bitesystems.com.tr
             </a>
             <button
               type="button"
-              class="copy-btn shrink-0 inline-flex items-center justify-center w-7 h-7 border border-border text-muted hover:text-white hover:border-gray-500 transition-colors"
+              class="copy-btn shrink-0 inline-flex items-center justify-center w-7 h-7 border border-border text-muted hover:text-slate-900 hover:border-slate-400 transition-colors"
               data-copy="info@bitesystems.com.tr"
               aria-label={t.contact.copyEmail}
               title={t.contact.copyEmail}
@@ -45,7 +45,7 @@ const t = useTranslations(Astro);
 
         <div class="border-t border-border pt-6">
           <p class="text-muted text-xs uppercase tracking-widest mb-3">{t.contact.locationLabel}</p>
-          <p class="text-white text-base font-light">{t.contact.locationValue}</p>
+          <p class="text-slate-900 text-base font-light">{t.contact.locationValue}</p>
         </div>
 
       </div>
@@ -58,7 +58,7 @@ const t = useTranslations(Astro);
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             class="w-full h-[320px] block border-0"
-            style="filter: grayscale(0.4) brightness(0.85);"
+            style="filter: grayscale(0.3);"
           ></iframe>
         </div>
       </div>

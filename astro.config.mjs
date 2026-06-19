@@ -4,6 +4,7 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   site: 'https://bite-systems.com',
   integrations: [tailwind()],
+  devToolbar: { enabled: false },
   server: { host: true },
   i18n: {
     defaultLocale: 'en',

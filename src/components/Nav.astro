@@ -5,6 +5,10 @@ import type { Lang } from '../i18n';
 const t = useTranslations(Astro);
 const lang = getLang(Astro.url);
 
+// `transparent` overlays the nav on a hero image: it starts see-through and
+// turns solid (bg-ink) once scrolled past the banner. See products page.
+const { transparent = false } = Astro.props;
+
 const links = [
   { label: t.nav.home, href: '/' },
   {
@@ -35,10 +39,17 @@ const otherLang: Lang = lang === 'en' ? 'tr' : 'en';
 const switcherHref = localized(canonical, otherLang);
 ---
 
-<header id="nav" class="fixed top-0 left-0 right-0 z-50 bg-[#101010] shadow-[0_6px_20px_-4px_rgba(0,0,0,0.6)] transition-all duration-300">
-  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+<header
+  id="nav"
+  data-transparent={transparent ? 'true' : 'false'}
+  class:list={[
+    'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
+    transparent ? 'bg-transparent' : 'bg-ink',
+  ]}
+>
+  <nav class="shell h-16 flex items-center justify-between gap-4">
     <a href={localized('/', lang)} class="text-2xl sm:text-3xl tracking-wide leading-none whitespace-nowrap" style="font-family: 'Saira Extra Condensed', sans-serif;">
-      <span class="lowercase font-semibold text-[#2563EB]">bite</span> <span class="font-light text-gray-300">Systems</span>
+      <span class="lowercase font-semibold text-[#2563EB]">bite</span> <span class="font-light text-slate-300">Systems</span>
     </a>
 
     <ul class="hidden md:flex items-center gap-6 lg:gap-8">
@@ -49,7 +60,7 @@ const switcherHref = localized(canonical, otherLang);
           rel="noopener noreferrer"
           aria-label={t.nav.youtube}
           title={t.nav.youtube}
-          class="inline-flex items-center text-gray-400 hover:text-white transition-colors duration-200"
+          class="inline-flex items-center text-slate-300 hover:text-white transition-colors duration-200"
         >
           <svg width="28" height="20" viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" class="translate-y-[3px]">
             <path d="M23.5 2.65a3 3 0 0 0-2.11-2.12C19.51 0 12 0 12 0S4.49 0 2.61.53A3 3 0 0 0 .5 2.65 31.3 31.3 0 0 0 0 8.5a31.3 31.3 0 0 0 .5 5.85 3 3 0 0 0 2.11 2.12C4.49 17 12 17 12 17s7.51 0 9.39-.53a3 3 0 0 0 2.11-2.12A31.3 31.3 0 0 0 24 8.5a31.3 31.3 0 0 0-.5-5.85ZM9.6 12.13 15.84 8.5 9.6 4.87v7.26Z" fill="currentColor"/>
@@ -62,7 +73,7 @@ const switcherHref = localized(canonical, otherLang);
             <span
               class:list={[
                 'text-sm tracking-wide uppercase transition-colors duration-200 inline-flex items-center gap-1 cursor-default select-none',
-                isActiveBranch(link) ? 'text-white' : 'text-gray-400 hover:text-white',
+                isActiveBranch(link) ? 'text-white' : 'text-slate-300 hover:text-white',
               ]}
             >
               {link.label}
@@ -75,7 +86,7 @@ const switcherHref = localized(canonical, otherLang);
               href={localized(link.href, lang)}
               class:list={[
                 'text-sm tracking-wide uppercase transition-colors duration-200 inline-flex items-center gap-1',
-                isActiveBranch(link) ? 'text-white' : 'text-gray-400 hover:text-white',
+                isActiveBranch(link) ? 'text-white' : 'text-slate-300 hover:text-white',
               ]}
             >
               {link.label}
@@ -84,14 +95,14 @@ const switcherHref = localized(canonical, otherLang);
 
           {link.children && (
             <div class="absolute left-0 top-full pt-3 opacity-0 invisible group-hover/menu:opacity-100 group-hover/menu:visible transition-all duration-200">
-              <ul class="bg-[#0d0d0d] border border-[#252525] py-2 min-w-[160px] overflow-hidden">
+              <ul class="bg-ink border border-white/10 py-2 min-w-[160px] overflow-hidden">
                 {link.children.map(child => (
                   <li>
                     <a
                       href={localized(child.href, lang)}
                       class:list={[
                         'block px-4 py-2 text-sm tracking-wide uppercase transition-colors duration-200',
-                        isActive(child.href) ? 'text-white' : 'text-gray-400 hover:text-white',
+                        isActive(child.href) ? 'text-white' : 'text-slate-300 hover:text-white',
                       ]}
                     >
                       {child.label}
@@ -107,18 +118,18 @@ const switcherHref = localized(canonical, otherLang);
         <a
           href={switcherHref}
           aria-label={`Switch to ${LANG_LABELS[otherLang]}`}
-          class="text-sm tracking-wide uppercase text-gray-400 hover:text-white transition-colors duration-200 border border-border hover:border-gray-500 px-2 py-1"
+          class="text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40 px-2 py-1"
         >
           {LANG_LABELS[otherLang]}
         </a>
       </li>
     </ul>
 
-    <div class="md:hidden flex items-center gap-2">
+    <div class="md:hidden flex items-center gap-2 -mr-4">
       <a
         href={switcherHref}
         aria-label={`Switch to ${LANG_LABELS[otherLang]}`}
-        class="inline-flex items-center justify-center min-w-9 h-10 px-2 text-sm tracking-wide uppercase text-gray-400 hover:text-white transition-colors duration-200 border border-border hover:border-gray-500"
+        class="inline-flex items-center justify-center min-w-9 h-10 px-2 text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40"
       >
         {LANG_LABELS[otherLang]}
       </a>
@@ -128,7 +139,7 @@ const switcherHref = localized(canonical, otherLang);
         rel="noopener noreferrer"
         aria-label={t.nav.youtube}
         title={t.nav.youtube}
-        class="inline-flex items-center justify-center w-10 h-10 text-gray-300 hover:text-white transition-colors duration-200"
+        class="inline-flex items-center justify-center w-10 h-10 text-slate-300 hover:text-white transition-colors duration-200"
       >
         <svg width="26" height="18" viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd">
           <path d="M23.5 2.65a3 3 0 0 0-2.11-2.12C19.51 0 12 0 12 0S4.49 0 2.61.53A3 3 0 0 0 .5 2.65 31.3 31.3 0 0 0 0 8.5a31.3 31.3 0 0 0 .5 5.85 3 3 0 0 0 2.11 2.12C4.49 17 12 17 12 17s7.51 0 9.39-.53a3 3 0 0 0 2.11-2.12A31.3 31.3 0 0 0 24 8.5a31.3 31.3 0 0 0-.5-5.85ZM9.6 12.13 15.84 8.5 9.6 4.87v7.26Z" fill="currentColor"/>
@@ -140,7 +151,7 @@ const switcherHref = localized(canonical, otherLang);
         aria-label={t.nav.toggleMenu}
         aria-expanded="false"
         aria-controls="mobile-menu"
-        class="inline-flex items-center justify-center w-10 h-10 text-gray-300 hover:text-white"
+        class="inline-flex items-center justify-center w-10 h-10 text-slate-300 hover:text-white"
       >
         <svg id="nav-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
@@ -152,13 +163,13 @@ const switcherHref = localized(canonical, otherLang);
     </div>
   </nav>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-[#0d0d0d] border-t border-[#252525]">
+  <div id="mobile-menu" class="hidden md:hidden bg-ink border-t border-white/10">
     <ul class="px-6 py-4 flex flex-col gap-1">
       {links.map(link => (
         <Fragment>
           <li>
             {link.children ? (
-              <span class="block py-2 text-sm tracking-wide uppercase text-gray-500 select-none">
+              <span class="block py-2 text-sm tracking-wide uppercase text-slate-400 select-none">
                 {link.label}
               </span>
             ) : (
@@ -166,7 +177,7 @@ const switcherHref = localized(canonical, otherLang);
                 href={localized(link.href, lang)}
                 class:list={[
                   'mobile-link block py-2 text-sm tracking-wide uppercase transition-colors duration-200',
-                  isActive(link.href) ? 'text-white' : 'text-gray-300 hover:text-white',
+                  isActive(link.href) ? 'text-white' : 'text-slate-300 hover:text-white',
                 ]}
               >
                 {link.label}
@@ -178,8 +189,8 @@ const switcherHref = localized(canonical, otherLang);
               <a
                 href={localized(child.href, lang)}
                 class:list={[
-                  'mobile-link block py-2 pl-4 text-sm tracking-wide uppercase transition-colors duration-200 border-l border-[#252525]',
-                  isActive(child.href) ? 'text-white' : 'text-gray-400 hover:text-white',
+                  'mobile-link block py-2 pl-4 text-sm tracking-wide uppercase transition-colors duration-200 border-l border-white/10',
+                  isActive(child.href) ? 'text-white' : 'text-slate-300 hover:text-white',
                 ]}
               >
                 {child.label}
@@ -199,19 +210,24 @@ const switcherHref = localized(canonical, otherLang);
   const iconOpen = document.getElementById('nav-icon-open');
   const iconClose = document.getElementById('nav-icon-close');
 
+  const transparent = nav?.dataset.transparent === 'true';
+
   function setScrolledStyle() {
-    const scrolled = window.scrollY > 40;
-    const menuOpen = menu && !menu.classList.contains('hidden');
-    if (scrolled || menuOpen) {
-      nav?.classList.remove('bg-[#101010]');
-      nav?.classList.add('bg-[#0d0d0d]', 'border-b', 'border-[#252525]');
-    } else {
-      nav?.classList.remove('bg-[#0d0d0d]', 'border-b', 'border-[#252525]');
-      nav?.classList.add('bg-[#101010]');
+    const menuOpen = menu ? !menu.classList.contains('hidden') : false;
+    // Over a hero, stay see-through until scrolled past most of the banner.
+    const solid = !transparent || menuOpen || window.scrollY > window.innerHeight * 0.6;
+    if (transparent) {
+      nav?.classList.toggle('bg-ink', solid);
+      nav?.classList.toggle('bg-transparent', !solid);
     }
+    const border = menuOpen || (solid && window.scrollY > 40);
+    nav?.classList.toggle('border-b', border);
+    nav?.classList.toggle('border-white/10', border);
   }
 
-  window.addEventListener('scroll', setScrolledStyle);
+  window.addEventListener('scroll', setScrolledStyle, { passive: true });
+  window.addEventListener('resize', setScrolledStyle);
+  setScrolledStyle();
 
   toggle?.addEventListener('click', () => {
     const open = menu?.classList.toggle('hidden') === false;

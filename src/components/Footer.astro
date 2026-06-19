@@ -5,17 +5,88 @@ const lang = getLang(Astro.url);
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-border px-6 py-10">
-  <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-muted text-sm">
-    <span class="text-xl text-white leading-none text-center md:text-left" style="font-family: 'Saira Extra Condensed', sans-serif;">
-      <span class="lowercase font-semibold text-[#2563EB]">bite</span> <span class="font-light text-gray-300">Systems</span>
-    </span>
-    <span class="text-center">{t.footer.copy(year)}</span>
-    <div class="flex flex-wrap gap-x-6 gap-y-2 justify-center md:justify-end">
-      <a href={localized('/products', lang)} class="hover:text-white transition-colors">{t.nav.products}</a>
-      <a href={localized('/hardware', lang)} class="hover:text-white transition-colors">{t.nav.hardware}</a>
-      <a href={localized('/team', lang)} class="hover:text-white transition-colors">{t.nav.team}</a>
-      <a href={localized('/contact', lang)} class="hover:text-white transition-colors">{t.nav.contact}</a>
+<footer class="bg-ink text-slate-400 pt-10 pb-8">
+  <div class="shell">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-12">
+
+      {/* Brand */}
+      <div>
+        <img
+          src="/icon-512.png"
+          alt="bite Systems"
+          width="88"
+          height="88"
+          loading="lazy"
+          decoding="async"
+          class="w-[88px] h-[88px] rounded-full"
+        />
+        <p class="mt-4 text-sm leading-relaxed max-w-xs">{t.footer.tagline}</p>
+        <div class="flex items-center gap-3 mt-6">
+          <a
+            href="https://youtu.be/LyIpHpMZL9c"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={t.nav.youtube}
+            title={t.nav.youtube}
+            class="w-9 h-9 inline-flex items-center justify-center border border-white/15 text-slate-300 hover:text-white hover:border-white/40 transition-colors"
+          >
+            <svg width="20" height="14" viewBox="0 0 24 17" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd">
+              <path d="M23.5 2.65a3 3 0 0 0-2.11-2.12C19.51 0 12 0 12 0S4.49 0 2.61.53A3 3 0 0 0 .5 2.65 31.3 31.3 0 0 0 0 8.5a31.3 31.3 0 0 0 .5 5.85 3 3 0 0 0 2.11 2.12C4.49 17 12 17 12 17s7.51 0 9.39-.53a3 3 0 0 0 2.11-2.12A31.3 31.3 0 0 0 24 8.5a31.3 31.3 0 0 0-.5-5.85ZM9.6 12.13 15.84 8.5 9.6 4.87v7.26Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <a
+            href="mailto:info@bitesystems.com.tr"
+            aria-label={t.contact.emailLabel}
+            title={t.contact.emailLabel}
+            class="w-9 h-9 inline-flex items-center justify-center border border-white/15 text-slate-300 hover:text-white hover:border-white/40 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      {/* Products */}
+      <div>
+        <p class="text-xs uppercase tracking-widest text-slate-500 mb-4">{t.footer.productsHeading}</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href={localized('/products', lang)} class="hover:text-white transition-colors">{t.nav.bSeries}</a></li>
+          <li><a href={localized('/hardware', lang)} class="hover:text-white transition-colors">{t.nav.hardware}</a></li>
+        </ul>
+      </div>
+
+      {/* Company */}
+      <div>
+        <p class="text-xs uppercase tracking-widest text-slate-500 mb-4">{t.footer.companyHeading}</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href={localized('/team', lang)} class="hover:text-white transition-colors">{t.nav.team}</a></li>
+          <li><a href={localized('/contact', lang)} class="hover:text-white transition-colors">{t.nav.contact}</a></li>
+        </ul>
+      </div>
+
+      {/* Contact */}
+      <div>
+        <p class="text-xs uppercase tracking-widest text-slate-500 mb-4">{t.nav.contact}</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="mailto:info@bitesystems.com.tr" class="hover:text-white transition-colors break-all">info@bitesystems.com.tr</a></li>
+          <li class="text-slate-400">{t.contact.locationValue}</li>
+        </ul>
+      </div>
+
     </div>
+
+    {/* Bottom bar */}
+    <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <span>{t.footer.copy(year)} · {t.footer.rights}</span>
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-2 justify-center">
+        <a href={localized('/products', lang)} class="hover:text-white transition-colors">{t.nav.products}</a>
+        <a href={localized('/hardware', lang)} class="hover:text-white transition-colors">{t.nav.hardware}</a>
+        <a href={localized('/team', lang)} class="hover:text-white transition-colors">{t.nav.team}</a>
+        <a href={localized('/contact', lang)} class="hover:text-white transition-colors">{t.nav.contact}</a>
+      </div>
+    </div>
+
   </div>
 </footer>
