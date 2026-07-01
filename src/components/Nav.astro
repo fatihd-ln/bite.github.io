@@ -95,7 +95,7 @@ const switcherHref = localized(canonical, otherLang);
 
           {link.children && (
             <div class="absolute left-0 top-full pt-3 opacity-0 invisible group-hover/menu:opacity-100 group-hover/menu:visible transition-all duration-200">
-              <ul class="bg-ink border border-white/10 py-2 min-w-[160px] overflow-hidden">
+              <ul class="bg-ink border border-white/10 py-2 min-w-[160px] overflow-hidden rounded-lg">
                 {link.children.map(child => (
                   <li>
                     <a
@@ -118,7 +118,7 @@ const switcherHref = localized(canonical, otherLang);
         <a
           href={switcherHref}
           aria-label={`Switch to ${LANG_LABELS[otherLang]}`}
-          class="text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40 px-2 py-1"
+          class="text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40 px-2 py-1 rounded-md"
         >
           {LANG_LABELS[otherLang]}
         </a>
@@ -129,7 +129,7 @@ const switcherHref = localized(canonical, otherLang);
       <a
         href={switcherHref}
         aria-label={`Switch to ${LANG_LABELS[otherLang]}`}
-        class="inline-flex items-center justify-center min-w-9 h-10 px-2 text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40"
+        class="inline-flex items-center justify-center min-w-9 h-10 px-2 text-sm tracking-wide uppercase text-slate-300 hover:text-white transition-colors duration-200 border border-white/20 hover:border-white/40 rounded-md"
       >
         {LANG_LABELS[otherLang]}
       </a>

@@ -11,7 +11,7 @@ const lang = getLang(Astro.url);
   <Nav />
   <main class="pt-16 min-h-screen flex items-center">
     <div class="shell text-center py-32">
-      <p class="text-accent text-sm font-bold tracking-[0.3em] uppercase mb-6">Error 404</p>
+      <p class="text-accent text-sm font-bold tracking-[0.15em] uppercase mb-6">Error 404</p>
       <h1 class="text-6xl sm:text-7xl font-light tracking-tight mb-6">
         Page not found.
       </h1>
@@ -24,7 +24,7 @@ const lang = getLang(Astro.url);
       <div class="flex items-center justify-center gap-6">
         <a
           href={localized('/', lang)}
-          class="font-product px-8 py-3 bg-accent text-white text-lg font-semibold tracking-wide uppercase hover:bg-blue-700 transition-colors duration-200"
+          class="font-product px-8 py-3 bg-accent text-white text-lg font-semibold tracking-wide uppercase hover:bg-blue-700 transition-colors duration-200 rounded-md"
         >
           {t.nav.home}
         </a>

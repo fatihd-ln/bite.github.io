@@ -10,7 +10,7 @@ const v = t.hardware.vision;
     <div>
 
       <div class="mb-16 max-w-2xl">
-        <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{t.hardware.kicker}</p>
+        <p class="text-accent text-xs tracking-[0.15em] uppercase mb-4">{t.hardware.kicker}</p>
         <h2 class="text-4xl font-light tracking-tight">
           {t.hardware.title}
         </h2>
@@ -19,13 +19,13 @@ const v = t.hardware.vision;
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl bg-border border border-border overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl bg-border border border-border overflow-hidden rounded-lg">
         {t.hardware.stats.map(s => (
           <div class="bg-card px-6 py-4 text-center">
             <p class="text-2xl font-light text-slate-900">
               {s.value}<span class="text-accent text-base ml-1 font-mono">{s.unit}</span>
             </p>
-            <p class="text-muted text-[10px] uppercase tracking-widest mt-2">{s.label}</p>
+            <p class="text-muted text-xs uppercase tracking-widest mt-2">{s.label}</p>
           </div>
         ))}
       </div>
@@ -65,7 +65,7 @@ const v = t.hardware.vision;
     <div id="vision">
 
       <div class="mb-16 max-w-2xl">
-        <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{v.kicker}</p>
+        <p class="text-accent text-xs tracking-[0.15em] uppercase mb-4">{v.kicker}</p>
         <h2 class="text-4xl font-light tracking-tight">
           {v.title}
         </h2>
@@ -74,12 +74,12 @@ const v = t.hardware.vision;
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl bg-border border border-border overflow-hidden">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px mb-16 max-w-3xl bg-border border border-border overflow-hidden rounded-lg">
         {v.stats.map(s => (
           <div class="bg-card px-6 py-5 text-center">
             <p class="text-xl font-light text-slate-900">{s.value}</p>
-            <p class="text-accent text-[10px] uppercase tracking-widest mt-1 font-mono">{s.sub}</p>
-            <p class="text-muted text-[10px] uppercase tracking-widest mt-1">{s.label}</p>
+            <p class="text-accent text-xs uppercase tracking-widest mt-1 font-mono">{s.sub}</p>
+            <p class="text-muted text-xs uppercase tracking-widest mt-1">{s.label}</p>
           </div>
         ))}
       </div>
@@ -104,7 +104,7 @@ const v = t.hardware.vision;
           <div
             role="img"
             aria-label={v.imageCaption}
-            class="relative w-3/4 h-auto aspect-[1202/850] mx-auto lg:mr-0 lg:ml-auto bg-[#0d0d0d] border border-border overflow-hidden"
+            class="relative w-3/4 h-auto aspect-[1202/850] mx-auto lg:mr-0 lg:ml-auto bg-[#0d0d0d] border border-border overflow-hidden rounded-2xl"
           >
             <img
               src="/media/vision-schematic.webp"
@@ -115,7 +115,7 @@ const v = t.hardware.vision;
               class="absolute inset-0 w-full h-full object-contain opacity-75"
             />
             <div class="absolute inset-0 flex items-center justify-center">
-              <span class="text-white text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase border border-white/30 px-4 py-2 bg-black/55">
+              <span class="text-white text-xs sm:text-sm font-semibold tracking-[0.4em] uppercase border border-white/30 px-4 py-2 bg-black/55 rounded-md">
                 {v.comingSoon}
               </span>
             </div>

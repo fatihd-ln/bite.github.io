@@ -33,7 +33,7 @@ const groups: { id: string; meta: { kicker: string; title: string; intro: string
     {groups.map(group => (
       <div class="products-group">
         <div class="mb-14">
-          <p class="text-accent text-xs tracking-[0.3em] uppercase mb-4">{group.meta.kicker}</p>
+          <p class="text-accent text-xs tracking-[0.15em] uppercase mb-4">{group.meta.kicker}</p>
           <h2 class="text-4xl font-light tracking-tight">{group.meta.title}</h2>
           <p class="text-slate-500 font-light mt-6 leading-relaxed max-w-2xl">{group.meta.intro}</p>
         </div>
@@ -51,7 +51,7 @@ const groups: { id: string; meta: { kicker: string; title: string; intro: string
                   layouts the ratio frees out to letterbox instead of leaving
                   big side gaps. Same rule as the header. */}
               <div class="product-media lg:w-[34%] shrink-0 lg:flex lg:items-start">
-                <div class="group relative w-full aspect-[16/15] max-h-[300px] lg:max-h-[439px] bg-[#e9edf4] overflow-hidden">
+                <div class="group relative w-full aspect-[16/15] max-h-[300px] lg:max-h-[439px] bg-[#e9edf4] overflow-hidden rounded-2xl">
                   {/* Only this layer scales on hover — badge, arrows, dots stay put */}
                   <div class="absolute inset-0 transition-transform duration-300 ease-out lg:group-hover:scale-[1.035]">
                   {hasImages ? (
@@ -79,7 +79,7 @@ const groups: { id: string; meta: { kicker: string; title: string; intro: string
                   </div>
 
                   {product.tagline && (
-                    <span class={`absolute top-4 right-4 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 ${product.overlay ? 'bg-ink text-slate-200' : 'bg-accent text-white'}`}>
+                    <span class={`absolute top-4 right-4 text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-md ${product.overlay ? 'bg-ink text-slate-200' : 'bg-accent text-white'}`}>
                       {product.tagline}
                     </span>
                   )}
@@ -107,19 +107,19 @@ const groups: { id: string; meta: { kicker: string; title: string; intro: string
                 {product.specs && product.specs.length > 0 && (
                   <div class="flex flex-wrap gap-1.5 mb-3">
                     {product.specs.map(spec => (
-                      <span class="text-[11px] uppercase tracking-wider text-slate-600 bg-[#e9edf4] px-2 py-1">{spec}</span>
+                      <span class="text-xs uppercase tracking-wider text-slate-600 bg-[#e9edf4] px-2 py-1 rounded-md">{spec}</span>
                     ))}
                   </div>
                 )}
 
                 <h3 class="font-product text-[33px] font-semibold tracking-wide mb-2">{product.name}</h3>
 
-                <p class="text-slate-700 text-[15px] leading-snug mb-4">{product.description}</p>
+                <p class="text-slate-700 text-[17px] leading-snug mb-4">{product.description}</p>
 
                 {product.details && product.details.length > 0 && (
                   <div>
                     <div class="mb-4">
-                      <p class="text-[11px] uppercase tracking-[0.2em] text-accent font-semibold">{t.products.specifications}</p>
+                      <p class="text-xs uppercase tracking-[0.2em] text-accent font-semibold">{t.products.specifications}</p>
                     </div>
                     <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-2.5">
                       {product.details.map((d, i) => (
