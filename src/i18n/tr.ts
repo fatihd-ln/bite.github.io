@@ -31,6 +31,7 @@ export const tr: Dictionary = {
     team: 'Hakkımızda',
     contact: 'İletişim',
     youtube: 'YouTube',
+    linkedin: 'LinkedIn',
     toggleMenu: 'Menüyü aç/kapa',
   },
   footer: {
@@ -148,7 +149,7 @@ export const tr: Dictionary = {
     stats: [
       { value: '10', unit: 'kHz', label: 'Stabilizasyon' },
       { value: '40', unit: 'kHz', label: 'FOC akım döngüsü' },
-      { value: '21', unit: 'bit', label: 'Mutlak enkoder · 5.1 µs SPI hat' },
+      { value: '21', unit: 'bit', label: 'Mutlak enkoder' },
     ],
     callouts: [
       { label: 'Ana MCU', value: 'STM32H743' },
@@ -184,8 +185,8 @@ export const tr: Dictionary = {
     },
   },
   team: {
-    kicker: 'Hakkımızda',
-    title: 'Kurucu ekip.',
+    kicker: 'Ekip',
+    title: 'Hakkımızda.',
     description: 'Donanım geliştirme ile ticari ve operasyonel tecrübeyi bir araya getiren, İstanbul merkezli bağımsız bir AR-GE ekibi.',
     members: [
       {

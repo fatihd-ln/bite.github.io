@@ -29,6 +29,7 @@ export const en = {
     team: 'About',
     contact: 'Contact',
     youtube: 'YouTube',
+    linkedin: 'LinkedIn',
     toggleMenu: 'Toggle menu',
   },
   footer: {
@@ -146,7 +147,7 @@ export const en = {
     stats: [
       { value: '10', unit: 'kHz', label: 'Stabilization' },
       { value: '40', unit: 'kHz', label: 'FOC current loop' },
-      { value: '21', unit: 'bit', label: 'Absolute encoder · 5.1 µs SPI link' },
+      { value: '21', unit: 'bit', label: 'Absolute encoder' },
     ],
     callouts: [
       { label: 'Brain', value: 'STM32H743' },
@@ -181,8 +182,8 @@ export const en = {
     },
   },
   team: {
-    kicker: 'About',
-    title: 'Founding team.',
+    kicker: 'Team',
+    title: 'About us.',
     description: 'Independent R&D effort based in Istanbul. The team combines hands-on hardware development with commercial and operational experience.',
     members: [
       {
